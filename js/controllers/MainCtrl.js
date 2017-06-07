@@ -1,11 +1,4 @@
 app.controller('mainCtrl', ['$scope', '$location',  function($scope, $location){
-	$scope.location = $location;
-
-  	$scope.$watch('location.url()', getTitle);
-
-  	function getTitle() {
-	    $scope.pageTitle = $location.url().substring(1);
-  	};
 	$scope.windowLoaded = function() {
 		console.log('window loaded');
 	}
@@ -15,5 +8,9 @@ app.controller('mainCtrl', ['$scope', '$location',  function($scope, $location){
 
 	$scope.getRating = function (ratingNumber) {
 		return new Array(ratingNumber);
+	}
+
+	$scope.getPageTitle = function() {
+		return $location.path().split('/')[1] || 'homepage';
 	}
 }]);
