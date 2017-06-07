@@ -16,11 +16,15 @@
 	<script src="js/modules.js"></script>
 	<script src="js/routing.js"></script>
 	<script src="js/directives/mainMenu.js"></script>
+	<script src="js/controllers/mainCtrl.js"></script>
 </head>
-<body data-ng-controller="mainCtrl">
+<body data-ng-controller="mainCtrl" data-ng-init="windowLoaded();">
 	<main-menu></main-menu>
 	<!-- MAIN CONTENT -->
-	<main data-ng-view>
+	<main>
+		<div class="container">
+			<data-ng-view></data-ng-view>
+		</div>
 	</main>
 </body>
 </html>
