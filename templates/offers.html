@@ -1,1 +1,41 @@
-<h1>Offers</h1>
+<h1>Offers: </h1>
+<div data-ng-controller="offersCtrl">
+	<div class="row">
+		<div class="caregiver col-xs-12 col-sm-6" data-ng-repeat="caregiver in caregivers">
+			<h2>{{caregiver.name}}</h2>
+			<h3>Rating: </h3>
+			<ul class="rating">
+				<li data-ng-repeat="i in getRating(5) track by $index">
+					<span ng-class="$index < caregiver.rating ? 'glyphicon-star': 'glyphicon-star-empty'" class="glyphicon"></span>
+				</li>
+			</ul>
+			<figure>
+				<img data-ng-src="{{caregiver.picture || 'images/caregivers/default.png'}}" alt="{{caregiver.name}}">
+			</figure>
+			<h3>Price: </h3>
+			<p>{{caregiver.price | currency}}</p>
+		</div>
+	</div>
+
+</div>
+
+
+<!-- <div class="pet-holder">
+	<figure>
+		<figcaption>
+			<h2>name</h2>
+			<h3>race</h3>
+			<div class="description">
+				<p>
+					<strong>age:</strong>
+				</p>
+				<p>
+					<strong>size:</strong>
+				</p>
+			</div>
+		</figcaption>
+		<a href="">
+			<img src="" alt="image">
+		</a>
+	</figure>
+</div> -->

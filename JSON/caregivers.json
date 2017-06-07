@@ -1,0 +1,15 @@
+{
+	"caregivers": [
+		{
+			"name": "Vasile",
+			"rating": 5,
+			"price": 100
+		},
+		{
+			"name": "Ionel Purcel",
+			"rating": 3,
+			"picture": "/images/caregivers/ionel.jpg",
+			"price": 90
+		}
+	]
+}
