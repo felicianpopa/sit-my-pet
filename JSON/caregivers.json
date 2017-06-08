@@ -3,13 +3,15 @@
 		{
 			"name": "Vasile",
 			"rating": 5,
-			"price": 100
+			"price": 100,
+			"petsList": ["dogs", "cats", "birds", "reptiles"]
 		},
 		{
 			"name": "Ionel Purcel",
 			"rating": 3,
 			"picture": "/images/caregivers/ionel.jpg",
-			"price": 90
+			"price": 900,
+			"petsList": ["dogs", "cats"]
 		}
 	]
 }
