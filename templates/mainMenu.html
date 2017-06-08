@@ -18,6 +18,25 @@
 	        <li data-ng-class="{active: isActive('/requests')}"><a href="#!requests">Requests</a></li>
 	        <li data-ng-class="{active: isActive('/offers')}"><a href="#!offers">Offers</a></li>
 	      </ul>
+	      <ul class="nav navbar-nav navbar-right">
+	        <li class="dropdown"  ng-if="mainData.user.loggedIn === true">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="#!profile-settings">Settings </a></li>
+	            <li><a href="#!/cash">Cash</a></li>
+	            <li><a href="#">Something else here</a></li>
+	            <li role="separator" class="divider"></li>
+	            <li><a href data-ng-click="logOut();">Log out</a></li>
+	          </ul>
+	        </li>
+	        <li ng-if="mainData.user.loggedIn === false" class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a href data-ng-click="openLoginModal();">Log in </a></li>
+	            <li><a href="#!/register">Register</a></li>
+	          </ul>
+	        </li>
+	      </ul>
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>

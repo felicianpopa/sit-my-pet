@@ -1,1 +1,1 @@
-var app = angular.module('mainModule', ['ngRoute']);
+var app = angular.module('mainModule', ['ngRoute', 'oc.modal']);

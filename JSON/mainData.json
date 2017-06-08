@@ -1,0 +1,12 @@
+{
+	"usersList": [
+		{
+			"userName": "felician",
+			"userPassword": "parola"
+		}
+	],
+	"user" : {
+		"loggedIn": false
+	}
+
+}
