@@ -1,0 +1,43 @@
+<h1>Register as:</h1>
+<label for="caregiver">Caregiver</label>
+<input value="caregiver" id="caregiver" type="radio" name="registerAs" data-ng-model="registerAs">
+<label for="petOwner">Pet Owner</label>
+<input value="petOwner" id="petOwner" type="radio" name="registerAs" data-ng-model="registerAs">
+<form action="">
+	<div data-ng-if="registerAs === 'caregiver'">
+		<h2>Caregiver</h2>
+		<fieldset class="row">
+			<div class="input-holder">
+				<div class="col-xs-6"><label for="CaregiverName">Name: </label></div>
+				<div class="col-xs-6"><input id="CaregiverName" type="text"></div>
+
+			</div>
+			<div class="input-holder">
+				<div class="col-xs-6"><label for="CaregiverSurName">Surname: </label></div>
+				<div class="col-xs-6"><input id="CaregiverSurName" type="text"></div>
+
+			</div>
+		</fieldset>
+		<fieldset class="row" data-ng-controller="countiesCtrl">
+			<div class="input-holder">
+				<div class="col-xs-6">
+					<label for="county">County</label>
+				</div>
+				<div class="col-xs-6">
+					<select data-ng-change="updateCities();" name="county" id="county" data-ng-model="selectedCounty" data-ng-options="x for x in counties"></select>
+				</div>
+			</div>
+			<div class="input-holder" data-ng-show="selectedCounty">
+				<div class="col-xs-6">
+					<label for="city">City</label>
+				</div>
+				<div class="col-xs-6">
+					<select name="city" id="city" data-ng-model="selectedCity" data-ng-options="x for x in cities"></select>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+	<div data-ng-if="registerAs === 'petOwner'">
+		<h2>Pet Owner</h2>
+	</div>
+</form>

@@ -18,6 +18,12 @@ app.config(function($routeProvider) {
 			pageTitle: "homepage"
 		}
 	})
+	.when('/register', {
+		templateUrl: '/templates/register.html',
+		data: {
+			pageTitle: "Registration page"
+		}
+	})
 	.otherwise({
 		redirectTo: '/home'
 	})

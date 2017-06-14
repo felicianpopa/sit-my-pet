@@ -1,3 +1,5 @@
+@import 'mixins';
+@import 'variables';
 // General
 // ====================================
 img {
@@ -15,6 +17,20 @@ ul {
 
 		.glyphicon-star {
 			color: #ffa923;
+		}
+	}
+}
+
+fieldset {
+	.input-holder {
+		float: left;
+		margin: 15px 0;
+		width: 50%;
+		@media (max-width: $screen-xs-max) {
+			width: 100%;
+		}
+		input {
+			width: 100%;
 		}
 	}
 }
