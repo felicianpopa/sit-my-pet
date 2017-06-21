@@ -55,8 +55,12 @@ app.controller('mainCtrl', ['$scope', '$location', '$http', '$ocModal',  functio
 	});
 	// Add a new user
 	$scope.addNewUser = function(newUser) {
-		if($scope.newUser.CaregiverPassword !== $scope.newUser.CaregiverConfirmPassword) {
+		if($scope.newUser.userPassword !== $scope.newUser.confirmUserPassword) {
 			$scope.newUserForm.$valid = false;
+			alert('parola confirmata nu este aceeasi cu parola, va ruga sa le recompletati');
+			$scope.newUser.userPassword = null;
+			$scope.newUser.confirmUserPassword = null;
+
 		}
 		if($scope.newUserForm.$valid) {
 			$scope.formNotValid = false;
@@ -69,7 +73,7 @@ app.controller('mainCtrl', ['$scope', '$location', '$http', '$ocModal',  functio
 	}
 	function saveMainData() {
 		$http.post('saveJson.php', $scope.mainData).then(function(data) {
-	      	console.log('Data saved')
+	      	alert('Data saved')
 	    });
 	}
 }]);

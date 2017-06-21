@@ -9,11 +9,11 @@
 		<fieldset class="row">
 			<div class="input-holder">
 				<div class="col-xs-6"><label for="CaregiverName">Name: </label></div>
-				<div class="col-xs-6"><input data-ng-class="{form_not_valid:formNotValid}" required data-ng-model="newUser.CaregiverName" id="CaregiverName" type="text"></div>
+				<div class="col-xs-6"><input data-ng-class="{form_not_valid:formNotValid}" required data-ng-model="newUser.Name" id="CaregiverName" type="text"></div>
 			</div>
 			<div class="input-holder">
 				<div class="col-xs-6"><label for="CaregiverSurName">Surname: </label></div>
-				<div class="col-xs-6"><input data-ng-class="{form_not_valid:formNotValid}" required data-ng-model="newUser.CaregiverSurName" id="CaregiverSurName" type="text"></div>
+				<div class="col-xs-6"><input data-ng-class="{form_not_valid:formNotValid}" required data-ng-model="newUser.surName" id="CaregiverSurName" type="text"></div>
 			</div>
 		</fieldset>
 		<fieldset class="row" data-ng-controller="countiesCtrl">
@@ -37,21 +37,21 @@
 		<fieldset class="row">
 			<div class="input-holder">
 				<div class="col-xs-6"><label for="CaregiverPassword">Email: </label></div>
-				<div class="col-xs-6"><input data-ng-class="{form_not_valid:formNotValid}" required data-ng-model="newUser.CaregiverEmail" id="CaregiverEmail" type="email"></div>
+				<div class="col-xs-6"><input data-ng-class="{form_not_valid:formNotValid}" required data-ng-model="newUser.email" id="CaregiverEmail" type="email"></div>
 			</div>
 			<div class="input-holder">
 				<div class="col-xs-6"><label for="CaregiverUserName">User name: </label></div>
-				<div class="col-xs-6"><input data-ng-class="{form_not_valid:formNotValid}" required data-ng-model="newUser.CaregiverUserName" id="CaregiverUserName" type="text"></div>
+				<div class="col-xs-6"><input data-ng-class="{form_not_valid:formNotValid}" required data-ng-model="newUser.userName" id="CaregiverUserName" type="text"></div>
 			</div>
 		</fieldset>
 		<fieldset class="row">
 			<div class="input-holder">
 				<div class="col-xs-6"><label for="CaregiverPassword">Password: </label></div>
-				<div class="col-xs-6"><input data-ng-class="{form_not_valid:formNotValid}" required data-ng-model="newUser.CaregiverPassword" id="CaregiverPassword" type="password"></div>
+				<div class="col-xs-6"><input data-ng-class="{form_not_valid:formNotValid}" required data-ng-model="newUser.userPassword" id="CaregiverPassword" type="password"></div>
 			</div>
 			<div class="input-holder">
 				<div class="col-xs-6"><label for="CaregiverConfirmPassword">Confirm Password: </label></div>
-				<div class="col-xs-6"><input data-ng-class="{form_not_valid:formNotValid}" required data-ng-model="newUser.CaregiverConfirmPassword" id="CaregiverConfirmPassword" type="password"></div>
+				<div class="col-xs-6"><input data-ng-class="{form_not_valid:formNotValid}" required data-ng-model="newUser.confirmUserPassword" id="CaregiverConfirmPassword" type="password"></div>
 			</div>
 		</fieldset>
 	</div>
