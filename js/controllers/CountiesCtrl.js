@@ -6,8 +6,7 @@ app.controller('countiesCtrl',['$scope', '$http', function($scope, $http){
 			$scope.counties.push(key)
 		});
     });
-    $scope.updateCities = function() {
-    	console.log($scope.countiesData);
-    	$scope.cities = $scope.countiesData[$scope.selectedCounty];
+    $scope.updateCities = function(selectedCounty) {
+    	$scope.cities = $scope.countiesData[selectedCounty];
     }
 }]);

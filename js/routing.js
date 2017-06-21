@@ -22,7 +22,8 @@ app.config(function($routeProvider) {
 		templateUrl: '/templates/register.html',
 		data: {
 			pageTitle: "Registration page"
-		}
+		},
+		controller: 'mainCtrl'
 	})
 	.otherwise({
 		redirectTo: '/home'

@@ -26,19 +26,26 @@ app.controller('mainCtrl', ['$scope', '$location', '$http', '$ocModal',  functio
 		$scope.mainData.user.loggedIn = false;
 	}
 	$scope.logIn = function() {
-		for(var i=0; i<$scope.mainData.usersList.length; i++) {
-			if ($scope.mainData.usersList[i].userName == jQuery('input[name="userName"]').val()){
-				if ($scope.mainData.usersList[i].userPassword == jQuery('input[name="userPassword"]').val()) {
-					$ocModal.close();
-					$scope.mainData.user.loggedIn = true;
-					return
+		if($scope.mainData.usersList.length < 1) {
+			alert('nu exista nici un user');
+			$ocModal.close();
+		}
+		else {
+			for(var i=0; i<$scope.mainData.usersList.length; i++) {
+				if ($scope.mainData.usersList[i].userName == jQuery('input[name="userName"]').val()){
+					if ($scope.mainData.usersList[i].userPassword == jQuery('input[name="userPassword"]').val()) {
+						$ocModal.close();
+						$scope.mainData.user.loggedIn = true;
+						saveMainData();
+						return
+					}
+					else {
+						alert('password is incorrect')
+					}
 				}
 				else {
-					alert('password is incorrect')
+					alert('user is incorrect')
 				}
-			}
-			else {
-				alert('user is incorrect')
 			}
 		}
 	}
@@ -46,4 +53,23 @@ app.controller('mainCtrl', ['$scope', '$location', '$http', '$ocModal',  functio
 	jQuery(document).on('click', '#login', function(){
 		$scope.logIn();
 	});
+	// Add a new user
+	$scope.addNewUser = function(newUser) {
+		if($scope.newUser.CaregiverPassword !== $scope.newUser.CaregiverConfirmPassword) {
+			$scope.newUserForm.$valid = false;
+		}
+		if($scope.newUserForm.$valid) {
+			$scope.formNotValid = false;
+			$scope.mainData.usersList.push(newUser)
+		 	saveMainData();
+		}
+		else{
+			$scope.formNotValid = true;
+		}
+	}
+	function saveMainData() {
+		$http.post('saveJson.php', $scope.mainData).then(function(data) {
+	      	console.log('Data saved')
+	    });
+	}
 }]);

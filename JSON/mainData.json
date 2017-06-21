@@ -1,12 +1,1 @@
-{
-	"usersList": [
-		{
-			"userName": "felician",
-			"userPassword": "parola"
-		}
-	],
-	"user" : {
-		"loggedIn": false
-	}
-
-}
+{"usersList":[],"user":{"loggedIn":false}}
