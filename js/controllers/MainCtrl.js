@@ -1,4 +1,4 @@
-app.controller('mainCtrl', ['$scope', '$location', '$http', '$ocModal',  function($scope, $location, $http, $ocModal){
+app.controller('mainCtrl', ['$scope', '$location', '$http', '$ocModal', 'mainDataService',  function($scope, $location, $http, $ocModal, mainDataService){
 	$scope.windowLoaded = function() {
 		console.log('window loaded');
 	}
@@ -13,9 +13,7 @@ app.controller('mainCtrl', ['$scope', '$location', '$http', '$ocModal',  functio
 	$scope.getPageTitle = function() {
 		return $location.path().split('/')[1] || 'homepage';
 	}
-	$http.get('/JSON/mainData.json').then(function (response){
-		$scope.mainData = response.data;
-	});
+
 	$scope.openLoginModal = function() {
 		$ocModal.open({
 			url: 'templates/loginModal.html',
@@ -38,7 +36,7 @@ app.controller('mainCtrl', ['$scope', '$location', '$http', '$ocModal',  functio
 						$ocModal.close();
 						$scope.mainData.user.loggedIn = true;
 						$scope.mainData.user.loggedInUserName = jQuery('input[name="userName"]').val();
-						saveMainData();
+						mainDataService.saveMainData($scope.mainData);
 						return
 					}
 					else {
@@ -68,15 +66,14 @@ app.controller('mainCtrl', ['$scope', '$location', '$http', '$ocModal',  functio
 			$scope.formNotValid = false;
 			var newUserName = $scope.newUser.userName
 			$scope.mainData.usersList[newUserName] = newUser;
-		 	saveMainData();
+		 	mainDataService.saveMainData($scope.mainData);
 		}
 		else{
 			$scope.formNotValid = true;
 		}
 	}
-	function saveMainData() {
-		$http.post('saveJson.php', $scope.mainData).then(function(data) {
-	      	alert('Data saved')
-	    });
-	}
+
+	mainDataService.loadMainData().then(function(response){
+		$scope.mainData = response.data
+	})
 }]);
