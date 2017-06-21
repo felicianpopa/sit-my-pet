@@ -26,16 +26,18 @@ app.controller('mainCtrl', ['$scope', '$location', '$http', '$ocModal',  functio
 		$scope.mainData.user.loggedIn = false;
 	}
 	$scope.logIn = function() {
-		if($scope.mainData.usersList.length < 1) {
+		console.log('running')
+		if(angular.equals($scope.mainData.usersList, {})) {
 			alert('nu exista nici un user');
 			$ocModal.close();
 		}
 		else {
-			for(var i=0; i<$scope.mainData.usersList.length; i++) {
-				if ($scope.mainData.usersList[i].userName == jQuery('input[name="userName"]').val()){
-					if ($scope.mainData.usersList[i].userPassword == jQuery('input[name="userPassword"]').val()) {
+			for(var key in $scope.mainData.usersList) {
+				if ($scope.mainData.usersList[key].userName == jQuery('input[name="userName"]').val()){
+					if ($scope.mainData.usersList[key].userPassword == jQuery('input[name="userPassword"]').val()) {
 						$ocModal.close();
 						$scope.mainData.user.loggedIn = true;
+						$scope.mainData.user.loggedInUserName = jQuery('input[name="userName"]').val();
 						saveMainData();
 						return
 					}
@@ -64,7 +66,8 @@ app.controller('mainCtrl', ['$scope', '$location', '$http', '$ocModal',  functio
 		}
 		if($scope.newUserForm.$valid) {
 			$scope.formNotValid = false;
-			$scope.mainData.usersList.push(newUser)
+			var newUserName = $scope.newUser.userName
+			$scope.mainData.usersList[newUserName] = newUser;
 		 	saveMainData();
 		}
 		else{
