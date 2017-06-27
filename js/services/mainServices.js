@@ -50,10 +50,10 @@ app.service('processUserData',['mainDataService', '$ocModal', 'messageService',
 			}
 			if(userFound) {
 				if(passwordCorrect) {
-					// If all is good we close the modal.
-					// We update the scopes and save the data from the modal's onClose function callback.
 					$ocModal.close();
-
+					$scope.mainData.user.loggedIn = true;
+					$scope.mainData.user.loggedInUserName = jQuery('input[name="userName"]').val();
+					mainDataService.saveMainData($scope.mainData);
 				}
 				else {
 					messageService.setMessage('danger', 'The password is incorrect', 2000);
