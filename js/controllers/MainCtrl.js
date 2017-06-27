@@ -18,7 +18,12 @@ app.controller('mainCtrl', ['$scope', '$location', '$http', '$ocModal', 'mainDat
 	$scope.openLoginModal = function() {
 		$ocModal.open({
 			url: 'templates/loginModal.html',
-			controller: 'mainCtrl'
+			controller: 'mainCtrl',
+			onClose: function() {
+				$scope.mainData.user.loggedIn = true;
+				$scope.mainData.user.loggedInUserName = jQuery('input[name="userName"]').val();
+				mainDataService.saveMainData($scope.mainData);
+			}
 		});
 	}
 
@@ -27,7 +32,6 @@ app.controller('mainCtrl', ['$scope', '$location', '$http', '$ocModal', 'mainDat
 	}
 
 	$scope.logIn = function() {
-		console.log('running');
 		processUserData.logIn($scope);
 	}
 
