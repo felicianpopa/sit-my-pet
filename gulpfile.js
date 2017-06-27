@@ -9,7 +9,9 @@ uncss = require('gulp-uncss'),
 autoprefixer = require('autoprefixer-core'),
 postcss = require('gulp-postcss'),
 browserSync = require('browser-sync'),
+notify       = require('gulp-notify'),
 reload = browserSync.reload;
+
 
 // define the default task and add the watch task to it
 gulp.task('default', ['watch', 'serve']);
@@ -20,14 +22,14 @@ gulp.task('sass', function () {
     return sass('sass', {
         style: 'expanded',
         sourcemap: true
-    }) 
+    })
     //log errors
     .on('error', function (err) {
       console.error('Error!', err.message);
    })
     // pipe steps
     .pipe(postcss([ autoprefixer({ browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'ie >= 10'] }) ])) // vendor prefixes
-    
+
     // remove unused css
     // .pipe(uncss({
     //     html: ['*.html', '*.php', 'js/**/*.js']
@@ -38,6 +40,9 @@ gulp.task('sass', function () {
         sourceRoot: '/sass' // the source of the scss
     }))
     .pipe(gulp.dest('css')) // write css
+    .pipe(notify({
+        message: 'Styles task complete'
+    }));
 });
 
 // serve url
@@ -63,7 +68,7 @@ gulp.task('tunnel', function() {
         tunnel: "frontEnd",
         open: false,
         ghostMode: false,
-        notify: false
+        notify: true
     });
 
     gulp.watch('scss/**/*.scss', ['scss']);
