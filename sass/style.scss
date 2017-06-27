@@ -41,6 +41,17 @@ select {
 		border: 1px solid red;
 	}
 }
+
+message {
+	z-index: 99999999;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	h1 {
+		padding: 15px 0;
+	}
+}
 // End General
 // ====================================
 

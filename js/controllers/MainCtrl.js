@@ -1,5 +1,5 @@
-app.controller('mainCtrl', ['$scope', '$location', '$http', '$ocModal', 'mainDataService', 'processUserData',
-	function($scope, $location, $http, $ocModal, mainDataService, processUserData){
+app.controller('mainCtrl', ['$scope', '$location', '$http', '$ocModal', 'mainDataService', 'processUserData', 'messageService',
+	function($scope, $location, $http, $ocModal, mainDataService, processUserData, messageService){
 	$scope.windowLoaded = function() {
 		console.log('window loaded');
 	}
@@ -27,17 +27,13 @@ app.controller('mainCtrl', ['$scope', '$location', '$http', '$ocModal', 'mainDat
 	}
 
 	$scope.logIn = function() {
+		console.log('running');
 		processUserData.logIn($scope);
 	}
 
 	$scope.logOut = function() {
 		processUserData.logOut($scope);
 	}
-
-	// Call the login function.
-	jQuery(document).on('click', '#login', function(){
-		$scope.logIn();
-	});
 
 	mainDataService.loadMainData().then(function(response){
 		$scope.mainData = response.data

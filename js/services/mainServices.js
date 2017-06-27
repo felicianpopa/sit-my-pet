@@ -1,30 +1,23 @@
 // Load/save the main data.
-app.service('mainDataService',['$ocModal', '$http', function($ocModal, $http){
+app.service('mainDataService',['$http', 'messageService', function($http, messageService){
 	this.loadMainData = function() {
 		return $http.get('/JSON/mainData.json').then(function (response){
 			return response;
 		});
 	}
-	this.saveMainData = function(dataToSave, scope) {
+	this.saveMainData = function(dataToSave) {
 		$http.post('saveJson.php', dataToSave).then(function(data) {
-			$ocModal.open({
-				url: 'templates/alertBox.html',
-				controller: 'mainCtrl',
-				init: {
-					alertText: 'data saved',
-					alertType: 'text-success'
-				}
-			});
+			messageService.setMessage('success', 'Data saved', 2000);
 	    });
 	}
 }]);
 
-app.service('processUserData',['mainDataService', '$ocModal',
-	function(mainDataService, $ocModal){
+app.service('processUserData',['mainDataService', '$ocModal', 'messageService',
+	function(mainDataService, $ocModal, messageService){
 	this.addNewUser = function(newUser, $scope) {
 		if($scope.newUser.userPassword !== $scope.newUser.confirmUserPassword) {
 			$scope.newUserForm.$valid = false;
-			alert('parola confirmata nu este aceeasi cu parola, va ruga sa le recompletati');
+			messageService.setMessage('danger', 'The passwords do not match', 2000);
 			$scope.newUser.userPassword = null;
 			$scope.newUser.confirmUserPassword = null;
 
@@ -33,7 +26,7 @@ app.service('processUserData',['mainDataService', '$ocModal',
 			$scope.formNotValid = false;
 			var newUserName = $scope.newUser.userName
 			$scope.mainData.usersList[newUserName] = newUser;
-			mainDataService.saveMainData($scope.mainData, $scope);
+			mainDataService.saveMainData($scope.mainData);
 		}
 		else{
 			$scope.formNotValid = true;
@@ -43,15 +36,7 @@ app.service('processUserData',['mainDataService', '$ocModal',
 		var userFound = false;
 		var passwordCorrect = false;
 		if(angular.equals($scope.mainData.usersList, {})) {
-			$ocModal.open({
-				url: 'templates/alertBox.html',
-				controller: 'mainCtrl',
-				init: {
-					alertText: 'There are no users in the database',
-					alertType: 'text-danger'
-				}
-			});
-			$ocModal.close();
+			messageService.setMessage('danger', 'There are no users in the database', 2000);
 		}
 		else {
 			for(var key in $scope.mainData.usersList) {
@@ -68,34 +53,20 @@ app.service('processUserData',['mainDataService', '$ocModal',
 					$ocModal.close();
 					$scope.mainData.user.loggedIn = true;
 					$scope.mainData.user.loggedInUserName = jQuery('input[name="userName"]').val();
-					mainDataService.saveMainData($scope.mainData, $scope);
+					mainDataService.saveMainData($scope.mainData);
 				}
 				else {
-					$ocModal.open({
-						url: 'templates/alertBox.html',
-						controller: 'mainCtrl',
-						init: {
-							alertText: 'The password is incorrect',
-							alertType: 'text-danger'
-						}
-					});
+					messageService.setMessage('danger', 'The password is incorrect', 2000);
 				}
 			}
 			else {
-				$ocModal.open({
-					url: 'templates/alertBox.html',
-					controller: 'mainCtrl',
-					init: {
-						alertText: 'This user does not exist',
-						alertType: 'text-danger'
-					}
-				});
+				messageService.setMessage('danger', 'The user does not exist', 2000);
 			}
 		}
 	}
 	this.logOut = function($scope) {
 		$scope.mainData.user.loggedIn = false;
 		$scope.mainData.user.loggedInUserName = null;
-		mainDataService.saveMainData($scope.mainData, $scope);
+		mainDataService.saveMainData($scope.mainData);
 	}
 }]);
