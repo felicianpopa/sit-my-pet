@@ -27,8 +27,11 @@ app.controller('mainCtrl', ['$scope', '$location', '$http', '$ocModal', 'mainDat
 	}
 
 	$scope.logIn = function() {
-		console.log('running');
 		processUserData.logIn($scope);
+	}
+
+	$scope.returnLoginData = function() {
+		return processUserData.loginData
 	}
 
 	$scope.logOut = function() {
@@ -36,6 +39,8 @@ app.controller('mainCtrl', ['$scope', '$location', '$http', '$ocModal', 'mainDat
 	}
 
 	mainDataService.loadMainData().then(function(response){
-		$scope.mainData = response.data
+        $scope.mainData = response.data
+		processUserData.loginData = $scope.mainData.user
+		$scope.returnLoginData();
 	})
 }]);

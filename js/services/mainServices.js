@@ -14,6 +14,8 @@ app.service('mainDataService',['$http', 'messageService', function($http, messag
 
 app.service('processUserData',['mainDataService', '$ocModal', 'messageService',
 	function(mainDataService, $ocModal, messageService){
+
+	var self  = this;
 	this.addNewUser = function(newUser, $scope) {
 		if($scope.newUser.userPassword !== $scope.newUser.confirmUserPassword) {
 			$scope.newUserForm.$valid = false;
@@ -32,6 +34,10 @@ app.service('processUserData',['mainDataService', '$ocModal', 'messageService',
 			$scope.formNotValid = true;
 		}
 	}
+	this.loginData = {
+		'loggedIn': false,
+		'loggedInUserName': null
+	};
 	this.logIn = function($scope) {
 		var userFound = false;
 		var passwordCorrect = false;
@@ -54,6 +60,8 @@ app.service('processUserData',['mainDataService', '$ocModal', 'messageService',
 					$scope.mainData.user.loggedIn = true;
 					$scope.mainData.user.loggedInUserName = jQuery('input[name="userName"]').val();
 					mainDataService.saveMainData($scope.mainData);
+					self.loginData.loggedIn = true;
+					self.loginData.loggedInUserName = jQuery('input[name="userName"]').val();
 				}
 				else {
 					messageService.setMessage('danger', 'The password is incorrect', 2000);
